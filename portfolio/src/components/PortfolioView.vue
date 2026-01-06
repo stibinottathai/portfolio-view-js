@@ -85,7 +85,7 @@ const projects = ref([
     title: 'Spendly',
     tags: ['Flutter', 'Dart', 'Firebase','Riverpod'],
     description: 'Spendly is a smart expense tracker that helps you monitor your daily spending with clear statistics.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/spendly.png',
     detailsLink: '#',
     sourceLink: '#'
   },
@@ -93,7 +93,7 @@ const projects = ref([
     title: 'Luckey Spinner',
     tags: ['Flutter', 'Dart', 'SqfLite','Riverpod'],
     description: 'Real-time chat application with group messaging, media sharing, and push notifications.',
-    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/luckey_spinner.png',
     detailsLink: '#',
     sourceLink: '#'
   },
@@ -101,7 +101,7 @@ const projects = ref([
     title: 'Flow Tracker',
     tags: ['Flutter', 'Dart', 'SqfLite', 'Riverpod'],
     description: 'Productivity tool for tracking daily tasks with offline support and data synchronization.',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/flow_track.png',
     detailsLink: '#',
 // ... existing code ...
     sourceLink: '#'
@@ -160,6 +160,19 @@ const scrollToSection = (id) => {
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' })
   }
+}
+
+// Image Modal State
+const selectedImage = ref(null)
+
+const openImageModal = (imageUrl) => {
+  selectedImage.value = imageUrl
+  document.body.style.overflow = 'hidden' // Prevent scrolling when modal is open
+}
+
+const closeImageModal = () => {
+  selectedImage.value = null
+  document.body.style.overflow = 'auto'
 }
 </script>
 
@@ -347,8 +360,8 @@ const scrollToSection = (id) => {
           <article v-for="(project, index) in projects" :key="index" class="reveal group flex flex-col bg-white dark:bg-card-dark rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50 shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300">
             <div class="relative aspect-video w-full overflow-hidden bg-slate-100 dark:bg-[#111318]">
               <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" :style="{ backgroundImage: `url(${project.image})` }"></div>
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span class="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-sm font-medium border border-white/20">View App</span>
+              <div @click="openImageModal(project.image)" class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer z-10">
+                <span class="px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-sm font-medium border border-white/20 hover:bg-white/20 transition-colors">View Full Image</span>
               </div>
             </div>
             <div class="flex flex-col flex-1 p-5 md:p-6 gap-4">
@@ -461,6 +474,16 @@ const scrollToSection = (id) => {
       </footer>
 
     </main>
+
+    <!-- Image Modal -->
+    <div v-if="selectedImage" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-10 transition-all duration-300" @click="closeImageModal">
+      <div class="relative w-full max-w-5xl h-full max-h-[90vh] flex items-center justify-center">
+        <button @click="closeImageModal" class="absolute -top-12 right-0 text-white hover:text-primary transition-colors">
+          <span class="material-symbols-outlined text-4xl">close</span>
+        </button>
+        <img :src="selectedImage" alt="Project Preview" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl" @click.stop />
+      </div>
+    </div>
   </div>
 </template>
 
