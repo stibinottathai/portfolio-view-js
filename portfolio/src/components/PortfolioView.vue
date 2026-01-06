@@ -255,18 +255,30 @@ const scrollToSection = (id) => {
           <div class="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
             <!-- Text Content -->
             <div class="flex flex-col gap-6 max-w-2xl reveal">
-              <div class="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/5 px-3 py-1 text-xs font-medium text-primary backdrop-blur-sm shadow-sm dark:shadow-none">
-                <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                </span>
-                Available for new projects
+              
+              <!-- Mobile Header: Image + Name -->
+              <div class="flex items-center gap-6 lg:block">
+                  <!-- Mobile Image -->
+                  <div class="lg:hidden shrink-0 relative w-24 h-24 rounded-full overflow-hidden border-2 border-slate-200 dark:border-white/10 shadow-lg">
+                      <img src="/profile.png" alt="Stibin Augustine" class="absolute inset-0 h-full w-full object-cover" />
+                  </div>
+                  
+                  <div class="flex flex-col gap-4">
+                      <div class="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/5 px-3 py-1 text-xs font-medium text-primary backdrop-blur-sm shadow-sm dark:shadow-none">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                        </span>
+                        Available for new projects
+                      </div>
+                      <h1 class="text-3xl md:text-5xl font-black leading-tight tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl">
+                        Hi, I'm Stibin. <br class="hidden lg:block"/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-slate-600 dark:to-white/60 min-h-[1.2em] inline-block">{{ typingText }}</span>
+                        <span class="animate-pulse text-primary font-thin">|</span>
+                      </h1>
+                  </div>
               </div>
-              <h1 class="text-5xl font-black leading-tight tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl">
-                Hi, I'm Stibin. <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-slate-600 dark:to-white/60 min-h-[1.2em] inline-block">{{ typingText }}</span>
-                <span class="animate-pulse text-primary font-thin">|</span>
-              </h1>
+
               <p class="text-lg text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
                 {{ summary }}
               </p>
@@ -292,9 +304,9 @@ const scrollToSection = (id) => {
 
             </div>
             
-            <!-- Visual Anchor -->
-            <div class="relative lg:h-full flex items-center justify-center lg:justify-end reveal" style="transition-delay: 200ms;">
-              <div class="relative aspect-square w-full max-w-md lg:max-w-lg rounded-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-black border border-slate-200 dark:border-white/10 shadow-2xl group transition-all duration-100 ease-out"
+            <!-- Visual Anchor (Desktop Only) -->
+            <div class="hidden lg:flex relative h-full items-center justify-end reveal" style="transition-delay: 200ms;">
+              <div class="relative aspect-square w-full max-w-lg rounded-2xl overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-black border border-slate-200 dark:border-white/10 shadow-2xl group transition-all duration-100 ease-out"
                    :style="{ transform: `perspective(1000px) rotateY(${mouseX * 5}deg) rotateX(${mouseY * -5}deg)` }">
                  <!-- Profile Image -->
                  <!-- Replace the 'src' below with your actual photo URL -->
